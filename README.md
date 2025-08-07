@@ -1,2 +1,40 @@
-# DEEPFEELINGS
-DEEPFEELINGS is a compact emotion classifier based on TinyLLaMA and fine-tuned with LoRA. Trained on GoEmotions and Emotions datasets, it maps text into 7 emotions: Anger, Fear, Joy, Sadness, Love, Surprise, and Neutral. Ideal for chatbots, sentiment analysis, and low-resource applications.
+# 💬 DEEPFEELINGS
+
+> Emotion Classification from Text Using TinyLLaMA + LoRA
+
+**DEEPFEELINGS** is a compact, efficient model for classifying emotions in text.  
+It is built on top of **TinyLLaMA** and fine-tuned using **LoRA (Low-Rank Adaptation)**, allowing for fast inference and low resource usage.
+
+---
+
+## 🔥 Features
+
+- ✅ Lightweight: Built on TinyLLaMA for speed and size
+- 🎯 Emotion detection in sentences and short texts
+- 🧠 Trained using LoRA with multiple strategies:
+  - Linear head on frozen LLM
+  - Prompt-based classification
+  - LoRA-finetuned + classifier
+- 🏷 7 emotion categories:
+  - `Anger`, `Fear`, `Joy`, `Sadness`, `Love`, `Surprise`, `Neutral`
+
+---
+
+## 📂 Dataset
+
+DEEPFEELINGS uses a combined and relabeled dataset from:
+- [GoEmotions](https://github.com/google-research/goemotions)
+- [Emotions Dataset (dair-ai)](https://github.com/dair-ai/emotion_dataset)
+
+These are mapped into a simplified label set of 7 universal emotions.
+
+---
+
+## 🚀 Quickstart
+
+```bash
+git clone https://github.com/Gilgal123/deepfeelings.git
+cd deepfeelings
+
+#TODO complete when done.
+
