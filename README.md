@@ -36,5 +36,8 @@ These are mapped into a simplified label set of 7 universal emotions.
 git clone https://github.com/Gilgal123/deepfeelings.git
 cd deepfeelings
 
-#TODO complete when done.
+you can train your own model using the train.py module.
+
+for evaluation run:
+  python ./eval.py [path to checkpoint] 
 
