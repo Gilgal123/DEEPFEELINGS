@@ -4,23 +4,8 @@ from torch.utils.data import DataLoader
 from Model import load_or_init_model, tokenizer
 from DataSet import get_cached_deepfeeling_dataset
 
+BATCH_SIZE = 4
 DEVICE = torch.device("cuda:1" if torch.cuda.device_count() > 1 else "cuda" if torch.cuda.is_available() else "cpu")
-
-def collate_fn(batch):
-    """
-    @brief Prepares a batch for model input by tokenizing texts and encoding labels.
-    
-    @param batch List of dataset samples, each sample is a dict with 'text' and 'reduced_label'.
-    @return dict Dictionary containing input_ids, attention_mask, and labels tensors.
-    """
-    texts = [x['text'] for x in batch]
-    labels = torch.tensor([label_names.index(x['reduced_label']) for x in batch], dtype=torch.long)
-    encodings = tokenizer(texts, return_tensors="pt", padding=True, truncation=True, max_length=128)
-    return {
-        "input_ids": encodings["input_ids"],
-        "attention_mask": encodings["attention_mask"],
-        "labels": labels
-    }
 
 def evaluate_model(checkpoint_path="./checkpoint"):
     """
@@ -33,6 +18,22 @@ def evaluate_model(checkpoint_path="./checkpoint"):
     dataset, class_weights, label_names = get_cached_deepfeeling_dataset(
         force_reload=False, prompt_format=False, only_low_class_count=True
     )
+
+    def collate_fn(batch):
+        """
+        @brief Prepares a batch for model input by tokenizing texts and encoding labels.
+        
+        @param batch List of dataset samples, each sample is a dict with 'text' and 'reduced_label'.
+        @return dict Dictionary containing input_ids, attention_mask, and labels tensors.
+        """
+        texts = [x['text'] for x in batch]
+        labels = torch.tensor([label_names.index(x['reduced_label']) for x in batch], dtype=torch.long)
+        encodings = tokenizer(texts, return_tensors="pt", padding=True, truncation=True, max_length=128)
+        return {
+            "input_ids": encodings["input_ids"],
+            "attention_mask": encodings["attention_mask"],
+            "labels": labels
+        }
 
     print(f"Loading model from checkpoint: {checkpoint_path}")
     model = load_or_init_model(len(label_names), weights_path=checkpoint_path)
@@ -69,6 +70,6 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         checkpoint = sys.argv[1]
     else:
-        checkpoint = input("Enter checkpoint path (default: ./checkpoint): ").strip() or "./checkpoint"
+        checkpoint = input("Enter checkpoint path (default: ./checkpoint.pt): ").strip() or "./checkpoint.pt"
 
     evaluate_model(checkpoint)
