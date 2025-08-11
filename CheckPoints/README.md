@@ -55,7 +55,9 @@ These experiments highlight the impact of fine-tuning techniques, input prompt e
 
 ## Usage
 
-Download the desired checkpoint and use the provided training and evaluation scripts to reproduce results or serve as baselines for further work.
+Download the checkpoint and use the provided training and evaluation scripts to reproduce results or serve as baselines for further work:
+
+https://technionmail-my.sharepoint.com/:u:/g/personal/elihai_gigi_campus_technion_ac_il/EVs03XE1R3tOv9VEGtQKOnkBQv7qNEGI8MfVW5jKo78bUg
 
 ---
 
